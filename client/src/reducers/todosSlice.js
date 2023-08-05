@@ -12,13 +12,16 @@ const todosSlice = createSlice({
             state.todos.push(action.payload);
         },
         deleteTodo: (state, action) => {
-            const filteredState = state.todos.filter(todo => todo.id !== action.payload);
+            const filteredState = state.todos.filter(todo => todo._id !== action.payload);
             state.todos = filteredState;
         },
         completeTodo: (state, action) => {
-            const todo = state.todos.find(todo => todo.id === action.payload);
-            todo.completed = !todo.completed;
+            const todo = state.todos.find(todo => todo._id === action.payload);
+            todo.todoCompleted = !todo.todoCompleted;
         },
+        clearTodos: (state) => {
+            state.todos = [];
+        }
     }
 });
 
@@ -26,6 +29,7 @@ export const {
     addTodo,
     deleteTodo,
     completeTodo,
+    clearTodos
 } = todosSlice.actions;
 
 export const todosReducer = todosSlice.reducer;

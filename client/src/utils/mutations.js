@@ -17,3 +17,14 @@ mutation Mutation($id: ID!, $todoCompleted: Boolean!) {
     }
   }
 `;
+
+export const DELETE_TODO = gql`
+mutation Mutation($id: ID!) {
+  removeTodoById(_id: $id) {
+    todoText
+    todoCompleted
+    todoAuthor
+    _id
+  }
+}
+`;

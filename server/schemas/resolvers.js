@@ -21,6 +21,10 @@ const resolvers = {
                 { new: true }
             );
             return updatedTodo;
+        },
+        removeTodoById: async (parent, { _id }) => {
+            const deletedTodo = await Todo.findByIdAndDelete(_id);
+            return deletedTodo;
         }
     }
 };

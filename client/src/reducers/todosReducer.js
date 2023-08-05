@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO } from '../actions/todoActionTypes';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, CLEAR_TODOS } from '../actions/todoActionTypes';
 
 const INITIAL_STATE = {
     todos: [],
@@ -14,18 +14,22 @@ export default function (state = INITIAL_STATE, action) {
         case DELETE_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo.id !== action.payload)
+                todos: state.todos.filter(todo => todo._id !== action.payload)
             };
         case COMPLETE_TODO:
             return {
                 ...state,
                 todos: state.todos.map(todo => {
-                    if (todo.id === action.payload) {
-                        todo.completed = !todo.completed;
+                    if (todo._id === action.payload) {
+                        todo.todoCompleted = !todo.todoCompleted;
                     }
                     return todo;
                 }
                 )
+            };
+        case CLEAR_TODOS:
+            return {
+                INITIAL_STATE
             };
         default:
             return state;
